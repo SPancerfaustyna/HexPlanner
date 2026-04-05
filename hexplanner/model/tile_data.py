@@ -1,0 +1,22 @@
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True, kw_only=True)
+class TileData:
+    tile_type: int
+    has_road: bool
+    height: int
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.tile_type, int) or isinstance(self.tile_type, bool):
+            raise TypeError("tile_type must be an integer")
+        if self.tile_type < 0 or self.tile_type > 15:
+            raise ValueError("tile_type must be in range 0..15")
+
+        if not isinstance(self.has_road, bool):
+            raise TypeError("has_road must be a boolean")
+
+        if not isinstance(self.height, int) or isinstance(self.height, bool):
+            raise TypeError("height must be an integer")
+        if self.height < 0 or self.height > 255:
+            raise ValueError("height must be in range 0..255")
