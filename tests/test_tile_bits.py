@@ -125,3 +125,28 @@ def test_unpack(tile_type, has_road):
     unpacked_type, unpacked_has_road = tile_bits.unpack(meta)
     assert unpacked_type == tile_type
     assert unpacked_has_road == has_road
+
+def test_unpack_from_raw_meta():
+    meta = 0b00010101  # Type = 5, Has road = True
+    tile_type, has_road = tile_bits.unpack(meta)
+    assert tile_type == 5
+    assert has_road == True
+
+# Masks tests
+@pytest.mark.parametrize("meta, expected", [
+    (0b00001111, 0b00001111),
+    (0b11110000, 0b00000000),
+    (0b10101010, 0b00001010),
+    (0b01010101, 0b00000101)
+])
+def test_type_mask(meta, expected):
+    assert tile_bits.get_type(meta) == expected
+
+@pytest.mark.parametrize("meta, expected", [
+    (0b00010000, True),
+    (0b00000000, False),
+    (0b11110000, True),
+    (0b00001111, False)
+])
+def test_road_mask(meta, expected):
+    assert tile_bits.has_road(meta) == expected

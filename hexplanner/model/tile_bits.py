@@ -2,7 +2,7 @@ TYPE_MASK   = 0b00001111
 ROAD_MASK   = 0b00010000
 
 # TYPE_BITS = 4
-TYPE_MASK = 0b1111
+TYPE_MAX = 0b1111
 
 def get_type(meta: int) -> int:
     return meta & TYPE_MASK
@@ -10,7 +10,7 @@ def get_type(meta: int) -> int:
 def set_type(meta: int, tile_type: int) -> int:
     if not isinstance(tile_type, int):
         raise TypeError("Tile type must be an integer")
-    if tile_type < 0 or tile_type > TYPE_MASK:
+    if tile_type < 0 or tile_type > TYPE_MAX:
         raise ValueError("Invalid tile type")
     meta = meta & ~TYPE_MASK
     type_bits = tile_type & TYPE_MASK
