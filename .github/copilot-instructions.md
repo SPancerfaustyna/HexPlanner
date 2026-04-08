@@ -314,6 +314,22 @@ Do not mix these.
 
 Use **pytest**
 
+### TDD Workflow (Model-First)
+
+When working on model features, follow a strict red-green-refactor loop:
+
+1. **Red**: Write or update a failing test that describes the desired behavior.
+2. **Green**: Implement the smallest change needed to make that test pass.
+3. **Refactor**: Improve code clarity/structure while keeping tests green.
+
+Additional rules:
+
+- Start from behavior and contracts, not current implementation details.
+- Prefer boundary and validation tests before happy-path expansion.
+- Keep each test focused on one behavior.
+- Do not skip the failing-test step unless fixing a broken test.
+- For bugs, first add a regression test that fails, then fix the bug.
+
 Test:
 
 - tile_bits logic
