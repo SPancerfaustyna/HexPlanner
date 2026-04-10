@@ -3,17 +3,17 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True, kw_only=True)
 class BigTileData:
-    tile_type: int
+    tile_type_id: int
     has_road: bool
     height: int
     x: int
     y: int
 
     def __post_init__(self) -> None:
-        if not isinstance(self.tile_type, int) or isinstance(self.tile_type, bool):
-            raise TypeError("tile_type must be an integer")
-        if self.tile_type < 0 or self.tile_type > 15:
-            raise ValueError("tile_type must be in range 0..15")
+        if not isinstance(self.tile_type_id, int) or isinstance(self.tile_type_id, bool):
+            raise TypeError("tile_type_id must be an integer")
+        if self.tile_type_id < 0 or self.tile_type_id > 15:
+            raise ValueError("tile_type_id must be in range 0..15")
 
         if not isinstance(self.has_road, bool):
             raise TypeError("has_road must be a boolean")
